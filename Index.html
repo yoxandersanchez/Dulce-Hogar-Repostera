@@ -1,0 +1,3130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- 1. DESCRIPTORES OBLIGATORIOS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Hogar Repostería | Licey al Medio, Santiago</title>
+  <meta name="description" content="Dulce Hogar Repostería en Las Palomas, Licey al Medio: bizcochos de vainilla, chocolate y piña, galletas, flan y tres leches por encargo.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================
+       PALETA ELEGANTE: BORGOÑA, ORO ROSA Y MARFIL
+       ========================================================== */
+    :root {
+      --fondo: #fcf8f6;
+      --fondo-suave: #f7ecef;
+      --superficie: #ffffff;
+      --borgona: #5c1e33;
+      --borgona-oscuro: #3d1120;
+      --oro-rosa: #c87d87;
+      --oro-suave: #d6b27c;
+      --texto-oscuro: #24171b;
+      --texto: #5c4c51;
+      --borde: #ebd9de;
+      --whatsapp: #1f9d55;
+      --whatsapp-oscuro: #167c42;
+      --error-fondo: #fef2f2;
+      --error-borde: #f5bcbc;
+      --error-texto: #991b1b;
+      --exito-fondo: #f0fdf4;
+      --exito-borde: #bbf7d0;
+      --exito-texto: #166534;
+      --sombra: 0 16px 38px rgba(92, 30, 51, 0.08);
+      --sombra-hover: 0 24px 48px rgba(92, 30, 51, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--fondo);
+      color: var(--texto);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    h1, h2, h3, .logo-texto, .splash-titulo {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--texto-oscuro);
+    }
+
+    .contenedor {
+      width: 90%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================
+       ANIMACIÓN DE INICIO ENRIQUECIDA + MARCO DORADO + TELÓN
+       ========================================================== */
+    .splash-inicio {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .splash-inicio.oculto {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Cortinas de terciopelo con pliegues sutiles */
+    .telon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50.5%;
+      background-color: #3a0e1d;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.16) 0px,
+          rgba(255, 255, 255, 0.04) 26px,
+          rgba(0, 0, 0, 0.18) 54px
+        ),
+        radial-gradient(circle at center, #73233e 0%, #3d1020 68%, #21050f 100%);
+      transition: transform 0.95s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 1;
+    }
+
+    .telon-izq {
+      left: 0;
+      border-right: 2px solid rgba(214, 178, 124, 0.55);
+      box-shadow: inset -45px 0 90px rgba(0, 0, 0, 0.45);
+    }
+
+    .telon-der {
+      right: 0;
+      border-left: 2px solid rgba(214, 178, 124, 0.55);
+      box-shadow: inset 45px 0 90px rgba(0, 0, 0, 0.45);
+    }
+
+    .splash-inicio.abrir-telon .telon-izq {
+      transform: translateX(-102%);
+    }
+
+    .splash-inicio.abrir-telon .telon-der {
+      transform: translateX(102%);
+    }
+
+    /* Marco ornamental dorado alrededor de toda la pantalla */
+    .splash-marco {
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(242, 213, 167, 0.35);
+      box-shadow: inset 0 0 0 6px transparent, inset 0 0 0 7px rgba(242, 213, 167, 0.15);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      animation: aparecerMarco 0.9s ease 0.1s forwards;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .splash-marco-esquina {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f2d5a7;
+    }
+
+    .esq-si { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+    .esq-sd { top: -4px; right: -4px; border-left: none; border-bottom: none; }
+    .esq-ii { bottom: -4px; left: -4px; border-right: none; border-top: none; }
+    .esq-id { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+    /* Aura luminosa central detrás del contenido */
+    .splash-aura {
+      position: absolute;
+      width: min(620px, 95vw);
+      height: min(620px, 95vw);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214, 178, 124, 0.24) 0%, rgba(200, 125, 135, 0.12) 38%, transparent 70%);
+      z-index: 2;
+      pointer-events: none;
+      animation: pulsarAura 2.6s ease-in-out infinite;
+    }
+
+    .splash-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+
+    .splash-inicio.abrir-telon .splash-canvas,
+    .splash-inicio.abrir-telon .splash-contenido,
+    .splash-inicio.abrir-telon .splash-marco,
+    .splash-inicio.abrir-telon .splash-aura {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+
+    .splash-contenido {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      max-width: 540px;
+      transition: opacity 0.45s ease, transform 0.55s ease;
+    }
+
+    .splash-etiqueta-top {
+      color: #f2d5a7;
+      font-size: 0.72rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+      opacity: 0;
+      animation: subirTexto 0.65s ease 0.15s forwards;
+    }
+
+    /* Escenario del emblema con doble anillo giratorio, rayos y ondas */
+    .splash-centro-logo {
+      position: relative;
+      width: 195px;
+      height: 195px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .splash-anillo-ext {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(246, 222, 192, 0.5);
+      animation: girarRayos 14s linear infinite, aparecerEscala 0.7s ease forwards;
+      pointer-events: none;
+    }
+
+    .splash-anillo-int {
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      border: 1.5px dotted rgba(232, 156, 168, 0.65);
+      animation: girarInverso 10s linear infinite, aparecerEscala 0.7s ease forwards;
+      pointer-events: none;
+    }
+
+    .splash-rayos {
+      position: absolute;
+      inset: -45px;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        from 0deg,
+        rgba(246, 222, 192, 0.24) 0deg 7deg,
+        transparent 7deg 22deg
+      );
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 20%, transparent 72%);
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 20%, transparent 72%);
+      animation: girarRayos 9s linear infinite, aparecerEscala 0.6s ease forwards;
+      pointer-events: none;
+    }
+
+    .splash-onda {
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(246, 222, 192, 0.9);
+      opacity: 0;
+      animation: ondaExpansiva 1.45s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+      pointer-events: none;
+    }
+
+    .splash-onda-2 {
+      border-color: rgba(232, 156, 168, 0.85);
+      animation-delay: 0.55s;
+    }
+
+    .splash-emblema {
+      width: 138px;
+      height: 138px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 0 28px rgba(214, 178, 124, 0.75));
+      animation: golpeLogo 0.95s cubic-bezier(0.22, 1.4, 0.36, 1) forwards, flotarLogo 2.2s ease-in-out 1s infinite;
+    }
+
+    .splash-trazo {
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      animation: dibujarTrazo 0.95s ease 0.15s forwards;
+    }
+
+    .splash-titulo {
+      font-size: clamp(2.6rem, 6vw, 4.1rem);
+      font-weight: 700;
+      line-height: 1.08;
+      background: linear-gradient(
+        110deg,
+        #fff5e4 0%,
+        #f2ce96 30%,
+        #ffffff 48%,
+        #d6b27c 65%,
+        #fff5e4 100%
+      );
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.5));
+      opacity: 0;
+      transform: scale(0.6);
+      animation:
+        entradaTitulo 0.75s cubic-bezier(0.22, 1.35, 0.36, 1) 0.3s forwards,
+        brilloMetalico 2.2s linear 0.6s infinite;
+    }
+
+    .splash-linea-sub {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 0.45rem;
+      opacity: 0;
+      animation: expandirSubtitulo 0.8s ease 0.65s forwards;
+    }
+
+    .splash-linea-sub::before,
+    .splash-linea-sub::after {
+      content: "";
+      width: 44px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #f2d5a7);
+    }
+
+    .splash-linea-sub::after {
+      background: linear-gradient(90deg, #f2d5a7, transparent);
+    }
+
+    .splash-subtitulo {
+      color: #f6dec0;
+      font-size: 0.9rem;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .splash-lema {
+      color: #f6d5dc;
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: subirTexto 0.6s ease 0.95s forwards;
+    }
+
+    .splash-barra {
+      width: 240px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 1.4rem;
+      box-shadow: 0 0 14px rgba(214, 178, 124, 0.3);
+    }
+
+    .splash-progreso {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #c87d87, #f6dec0, #d6b27c);
+      animation: llenarBarra 3.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .splash-saltar {
+      margin-top: 1.35rem;
+      background: linear-gradient(135deg, #f0d2a4 0%, #d1a362 100%);
+      border: none;
+      color: #2b0f18;
+      padding: 0.68rem 1.7rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      opacity: 0;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s, filter 0.2s;
+      animation: subirTexto 0.6s ease 0.55s forwards;
+    }
+
+    .splash-saltar:hover {
+      filter: brightness(1.07);
+      transform: scale(1.06);
+    }
+
+    @keyframes aparecerMarco {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulsarAura {
+      0%, 100% { transform: scale(0.95); opacity: 0.85; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+
+    @keyframes golpeLogo {
+      0% { opacity: 0; transform: scale(0.2) rotate(-18deg); }
+      60% { opacity: 1; transform: scale(1.14) rotate(4deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes ondaExpansiva {
+      0% { opacity: 0.95; transform: scale(0.5); }
+      100% { opacity: 0; transform: scale(2.7); }
+    }
+
+    @keyframes girarRayos {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes girarInverso {
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes entradaTitulo {
+      0% { opacity: 0; transform: scale(0.6) translateY(18px); }
+      70% { opacity: 1; transform: scale(1.06) translateY(-2px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes brilloMetalico {
+      0% { background-position: 0% center; }
+      100% { background-position: 220% center; }
+    }
+
+    @keyframes expandirSubtitulo {
+      0% { opacity: 0; transform: scaleX(0.75); }
+      100% { opacity: 1; transform: scaleX(1); }
+    }
+
+    @keyframes aparecerEscala {
+      from { opacity: 0; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes dibujarTrazo {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes flotarLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes subirTexto {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes llenarBarra {
+      to { width: 100%; }
+    }
+
+    /* ==========================================================
+       CONTROL DISCRETO DE MÚSICA AMBIENTAL (ESQUINA INFERIOR IZQUIERDA)
+       ========================================================== */
+    .control-musica {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 1500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      color: var(--borgona);
+      border: 1.5px solid var(--oro-suave);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(61, 17, 32, 0.16);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .control-musica:hover {
+      transform: translateY(-2px);
+      background-color: var(--fondo-suave);
+    }
+
+    .barras-musica {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .barras-musica span {
+      width: 3px;
+      height: 5px;
+      background-color: var(--borgona);
+      border-radius: 2px;
+      transition: height 0.2s;
+    }
+
+    .control-musica.sonando .barras-musica span:nth-child(1) {
+      animation: ondaMusica 0.8s ease-in-out infinite;
+    }
+
+    .control-musica.sonando .barras-musica span:nth-child(2) {
+      animation: ondaMusica 0.8s ease-in-out 0.2s infinite;
+    }
+
+    .control-musica.sonando .barras-musica span:nth-child(3) {
+      animation: ondaMusica 0.8s ease-in-out 0.4s infinite;
+    }
+
+    @keyframes ondaMusica {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+
+    /* ==========================================================
+       MUÑECO / PERSONAJE ANIMADO DE BIENVENIDA
+       ========================================================== */
+    .asistente-mascota {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.45rem;
+      pointer-events: none;
+    }
+
+    .globo-saludo {
+      pointer-events: auto;
+      position: relative;
+      background-color: #ffffff;
+      color: var(--texto-oscuro);
+      border: 1.5px solid var(--oro-suave);
+      border-radius: 18px 18px 4px 18px;
+      padding: 0.75rem 2rem 0.75rem 1rem;
+      max-width: 255px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      box-shadow: 0 12px 30px rgba(61, 17, 32, 0.18);
+      transform-origin: bottom right;
+      animation: popGlobo 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .globo-saludo.cerrado {
+      opacity: 0;
+      transform: scale(0.85) translateY(8px);
+      pointer-events: none;
+    }
+
+    .globo-saludo strong {
+      color: var(--borgona);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.84rem;
+    }
+
+    .cerrar-globo {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      border: none;
+      background: var(--fondo-suave);
+      color: var(--borgona);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .muneco-boton {
+      pointer-events: auto;
+      background: linear-gradient(145deg, #ffffff 0%, #f9eef1 100%);
+      border: 2px solid var(--oro-suave);
+      border-radius: 50%;
+      width: 86px;
+      height: 86px;
+      padding: 4px;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(61, 17, 32, 0.22);
+      transition: transform 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: respirarMuneco 3.2s ease-in-out infinite;
+    }
+
+    .muneco-boton:hover {
+      transform: scale(1.07);
+    }
+
+    .muneco-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .brazo-saludo {
+      transform-origin: 84px 92px;
+      animation: saludarMano 1.6s ease-in-out infinite;
+    }
+
+    .ojo-parpadeo {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: parpadearOjos 4.2s infinite;
+    }
+
+    @keyframes popGlobo {
+      from { opacity: 0; transform: scale(0.75) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes respirarMuneco {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes saludarMano {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-18deg); }
+      50% { transform: rotate(12deg); }
+      75% { transform: rotate(-15deg); }
+    }
+
+    @keyframes parpadearOjos {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+
+    /* ==========================================================
+       2. ENCABEZADO Y MENÚ DE NAVEGACIÓN POR PANTALLAS
+       ========================================================== */
+    header {
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--borde);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(92, 30, 51, 0.05);
+    }
+
+    .barra-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      position: relative;
+    }
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-texto {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--borgona);
+      line-height: 1.1;
+    }
+
+    .logo-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--oro-rosa);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .boton-menu-movil {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--borgona);
+      padding: 0.45rem 0.7rem;
+      border-radius: 10px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--texto-oscuro);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.52rem 1.1rem;
+      border-radius: 999px;
+      transition: all 0.22s ease;
+    }
+
+    nav a:hover,
+    nav a.activo-nav {
+      background-color: var(--fondo-suave);
+      color: var(--borgona);
+      font-weight: 600;
+    }
+
+    /* ==========================================================
+       SISTEMA DE PANTALLAS SEPARADAS
+       ========================================================== */
+    .pantalla {
+      display: none;
+      animation: aparecerPantalla 0.35s ease;
+    }
+
+    .pantalla.activa {
+      display: block;
+    }
+
+    @keyframes aparecerPantalla {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================
+       3. PANTALLA INICIO
+       ========================================================== */
+    .inicio {
+      background: linear-gradient(135deg, #431324 0%, #6d233c 55%, #8c3b52 100%);
+      color: #fff6f7;
+      padding: 4.2rem 0 4.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .inicio::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214, 178, 124, 0.24) 0%, transparent 70%);
+      top: -120px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .inicio-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .insignia-ubicacion {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(214, 178, 124, 0.45);
+      color: #f6dec0;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.42rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.3rem;
+    }
+
+    .inicio h1 {
+      color: #ffffff;
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      line-height: 1.12;
+      margin-bottom: 1.2rem;
+    }
+
+    .inicio p {
+      color: #f4dde2;
+      font-size: 1.02rem;
+      margin-bottom: 2rem;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .acciones-inicio {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.2rem;
+    }
+
+    .boton-principal {
+      display: inline-block;
+      background: linear-gradient(135deg, #e2c290 0%, #c89d60 100%);
+      color: #2b0f18;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.95rem 2.1rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .boton-principal:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .boton-secundario {
+      display: inline-block;
+      background-color: transparent;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 0.95rem 1.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .boton-secundario:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-color: #ffffff;
+    }
+
+    .sellos-confianza {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      padding-top: 1.3rem;
+      font-size: 0.84rem;
+      color: #f3dce1;
+    }
+
+    .sellos-confianza span strong {
+      display: block;
+      color: #f6dec0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .tarjeta-portada {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      background-color: #3a1220;
+    }
+
+    .tarjeta-portada img {
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .etiqueta-flotante {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      color: var(--texto-oscuro);
+      padding: 0.9rem 1.2rem;
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .etiqueta-flotante strong {
+      color: var(--borgona);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .colecciones-inicio {
+      padding: 3.5rem 0 4.5rem;
+    }
+
+    .grid-colecciones {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+      margin-top: 2rem;
+    }
+
+    .tarjeta-coleccion {
+      background-color: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      padding: 1.8rem;
+      box-shadow: var(--sombra);
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-align: left;
+    }
+
+    .tarjeta-coleccion:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--oro-rosa);
+    }
+
+    .tarjeta-coleccion span {
+      display: inline-block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--oro-rosa);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .tarjeta-coleccion h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .tarjeta-coleccion p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .enlace-falso {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--borgona);
+    }
+
+    /* ==========================================================
+       CABECERAS DE PANTALLA
+       ========================================================== */
+    .seccion-bloque {
+      padding: 3.6rem 0 4.8rem;
+    }
+
+    .cabecera-seccion {
+      text-align: center;
+      margin-bottom: 2.3rem;
+    }
+
+    .cabecera-seccion .etiqueta {
+      display: inline-block;
+      color: var(--borgona);
+      background-color: var(--fondo-suave);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .cabecera-seccion h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .cabecera-seccion p {
+      max-width: 580px;
+      margin: 0 auto;
+      font-size: 0.96rem;
+    }
+
+    /* ==========================================================
+       4. PANTALLA PRODUCTOS
+       ========================================================== */
+    .barra-filtros {
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .boton-filtro {
+      background-color: var(--superficie);
+      color: var(--texto);
+      border: 1px solid var(--borde);
+      padding: 0.58rem 1.3rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .boton-filtro:hover {
+      border-color: var(--borgona);
+      color: var(--borgona);
+    }
+
+    .boton-filtro.activo {
+      background-color: var(--borgona);
+      color: #ffffff;
+      border-color: var(--borgona);
+      box-shadow: 0 6px 16px rgba(92, 30, 51, 0.2);
+    }
+
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.9rem;
+    }
+
+    .tarjeta-producto {
+      background-color: var(--superficie);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      box-shadow: var(--sombra);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .tarjeta-producto.oculto {
+      display: none;
+    }
+
+    .tarjeta-producto:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--oro-rosa);
+    }
+
+    .foto-producto {
+      position: relative;
+      height: 225px;
+      overflow: hidden;
+      background-color: var(--fondo-suave);
+    }
+
+    .foto-producto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .tarjeta-producto:hover .foto-producto img {
+      transform: scale(1.06);
+    }
+
+    .badge-precio {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background-color: rgba(255, 255, 255, 0.95);
+      color: var(--borgona);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.36rem 0.9rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+    }
+
+    .badge-origen {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background-color: rgba(61, 17, 32, 0.84);
+      color: #f9e4e8;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    .info-producto {
+      padding: 1.45rem 1.55rem 1.65rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .tipo-producto {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--oro-rosa);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .tarjeta-producto h3 {
+      font-size: 1.38rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .tarjeta-producto p {
+      font-size: 0.88rem;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .boton-personalizar {
+      width: 100%;
+      background-color: var(--fondo-suave);
+      color: var(--borgona);
+      border: 1px solid var(--borde);
+      padding: 0.78rem 1rem;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .tarjeta-producto:hover .boton-personalizar {
+      background-color: var(--borgona);
+      color: #ffffff;
+      border-color: var(--borgona);
+    }
+
+    /* ==========================================================
+       PANTALLA DETALLE Y PERSONALIZACIÓN DEL PRODUCTO
+       ========================================================== */
+    .boton-volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background-color: var(--superficie);
+      color: var(--borgona);
+      border: 1px solid var(--borde);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .boton-volver:hover {
+      background-color: var(--fondo-suave);
+    }
+
+    .detalle-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2.6rem;
+      background-color: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: 26px;
+      padding: 2.2rem;
+      box-shadow: var(--sombra);
+    }
+
+    .detalle-foto-caja {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      height: 390px;
+      background-color: var(--fondo-suave);
+    }
+
+    .detalle-foto-caja img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vista-previa-estilo {
+      margin-top: 1.2rem;
+      background-color: var(--fondo);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .vista-previa-estilo h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--borgona);
+      margin-bottom: 0.55rem;
+    }
+
+    .muestra-color-activa {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--texto-oscuro);
+    }
+
+    .circulo-preview {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px var(--borde);
+      flex-shrink: 0;
+    }
+
+    .detalle-info h2 {
+      font-size: clamp(1.85rem, 3vw, 2.4rem);
+      margin: 0.35rem 0 0.6rem;
+    }
+
+    .precio-vivo-caja {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      background-color: var(--fondo-suave);
+      padding: 0.55rem 1.2rem;
+      border-radius: 14px;
+      margin: 0.9rem 0 1.4rem;
+    }
+
+    .precio-vivo-caja span {
+      font-size: 0.82rem;
+      color: var(--texto);
+    }
+
+    .precio-vivo-caja strong {
+      font-size: 1.45rem;
+      color: var(--borgona);
+    }
+
+    .bloque-opcion {
+      margin-bottom: 1.35rem;
+    }
+
+    .bloque-opcion-titulo {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--texto-oscuro);
+      margin-bottom: 0.55rem;
+    }
+
+    .lista-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .chip-opcion {
+      background-color: var(--fondo);
+      border: 1.5px solid var(--borde);
+      color: var(--texto-oscuro);
+      padding: 0.52rem 0.95rem;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .chip-opcion:hover {
+      border-color: var(--borgona);
+    }
+
+    .chip-opcion.seleccionado {
+      background-color: var(--borgona);
+      border-color: var(--borgona);
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(92, 30, 51, 0.2);
+    }
+
+    .punto-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      display: inline-block;
+    }
+
+    .boton-confirmar-personalizacion {
+      width: 100%;
+      background: linear-gradient(135deg, var(--borgona) 0%, #7d2945 100%);
+      color: #ffffff;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.6rem;
+      box-shadow: 0 12px 24px rgba(92, 30, 51, 0.24);
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .boton-confirmar-personalizacion:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    /* ==========================================================
+       5. PANTALLA PEDIDOS (FORMULARIO)
+       ========================================================== */
+    .caja-formulario {
+      background-color: var(--superficie);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem;
+      border-radius: 26px;
+      box-shadow: var(--sombra);
+      border: 1px solid var(--borde);
+    }
+
+    .resumen-seleccion {
+      display: none;
+      background-color: var(--fondo-suave);
+      border-left: 4px solid var(--borgona);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--borgona-oscuro);
+    }
+
+    .resumen-seleccion.visible {
+      display: block;
+    }
+
+    .grupo-campo {
+      margin-bottom: 1.25rem;
+    }
+
+    .fila-doble {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--texto-oscuro);
+      margin-bottom: 0.42rem;
+    }
+
+    .obligatorio {
+      color: var(--borgona);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.84rem 1rem;
+      border: 1.5px solid var(--borde);
+      border-radius: 12px;
+      background-color: #fffdfd;
+      font-family: inherit;
+      font-size: 0.93rem;
+      color: var(--texto-oscuro);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--borgona);
+      box-shadow: 0 0 0 4px rgba(92, 30, 51, 0.1);
+    }
+
+    input.campo-invalido,
+    select.campo-invalido {
+      border-color: var(--error-texto);
+      background-color: var(--error-fondo);
+    }
+
+    .boton-enviar {
+      width: 100%;
+      background: linear-gradient(135deg, var(--borgona) 0%, #7d2945 100%);
+      color: #ffffff;
+      border: none;
+      padding: 1rem;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.4rem;
+      box-shadow: 0 10px 22px rgba(92, 30, 51, 0.22);
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .boton-enviar:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .mensaje-formulario {
+      display: none;
+      margin-top: 1.4rem;
+      padding: 1.2rem 1.35rem;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .mensaje-formulario.error {
+      display: block;
+      background-color: var(--error-fondo);
+      color: var(--error-texto);
+      border: 1px solid var(--error-borde);
+    }
+
+    .mensaje-formulario.exito {
+      display: block;
+      background-color: var(--exito-fondo);
+      color: var(--exito-texto);
+      border: 1px solid var(--exito-borde);
+    }
+
+    .boton-confirmar-wa {
+      display: inline-block;
+      margin-top: 0.85rem;
+      background-color: var(--whatsapp);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.86rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      transition: background-color 0.2s;
+    }
+
+    .boton-confirmar-wa:hover {
+      background-color: var(--whatsapp-oscuro);
+    }
+
+    /* ==========================================================
+       6. PANTALLA CONTACTO Y PIE DE PÁGINA
+       ========================================================== */
+    .grid-contacto {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .tarjeta-contacto {
+      background-color: var(--superficie);
+      padding: 2.3rem 1.6rem;
+      border-radius: 22px;
+      border: 1px solid var(--borde);
+      box-shadow: var(--sombra);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .icono-circulo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background-color: var(--fondo-suave);
+      color: var(--borgona);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .tarjeta-contacto h3 {
+      font-size: 1.38rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .tarjeta-contacto p {
+      font-size: 0.94rem;
+    }
+
+    .boton-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+      background-color: var(--whatsapp);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(31, 157, 85, 0.25);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .boton-whatsapp:hover {
+      background-color: var(--whatsapp-oscuro);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: var(--borgona-oscuro);
+      color: #ecdbe0;
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 0.86rem;
+      margin-top: auto;
+    }
+
+    /* ==========================================================
+       ADAPTACIÓN A CELULARES
+       ========================================================== */
+    @media (max-width: 880px) {
+      .boton-menu-movil {
+        display: inline-flex;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        border-bottom: 1px solid var(--borde);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        padding: 1rem 0;
+      }
+
+      nav.abierto {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.7rem 1rem;
+      }
+
+      .inicio {
+        padding: 3rem 0 3.5rem;
+        text-align: center;
+      }
+
+      .inicio-grid,
+      .detalle-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .inicio p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .acciones-inicio,
+      .sellos-confianza {
+        justify-content: center;
+      }
+
+      .tarjeta-portada img {
+        height: 310px;
+      }
+
+      .detalle-foto-caja {
+        height: 270px;
+      }
+
+      .detalle-grid,
+      .caja-formulario {
+        padding: 1.5rem;
+      }
+
+      .fila-doble {
+        grid-template-columns: 1fr;
+      }
+
+      .splash-marco {
+        inset: 12px;
+      }
+
+      .splash-centro-logo {
+        width: 165px;
+        height: 165px;
+      }
+
+      .asistente-mascota {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .muneco-boton {
+        width: 70px;
+        height: 70px;
+      }
+
+      .globo-saludo {
+        max-width: 215px;
+        font-size: 0.78rem;
+      }
+
+      .control-musica {
+        bottom: 14px;
+        left: 12px;
+        padding: 0.48rem 0.85rem;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANIMACIÓN EXPLOSIVA DE INICIO CON MARCO DORADO, BOKEH, CHISPAS Y TELÓN -->
+  <div id="splash-inicio" class="splash-inicio" aria-label="Bienvenida a Dulce Hogar Repostería">
+    <div class="telon telon-izq"></div>
+    <div class="telon telon-der"></div>
+
+    <div class="splash-marco" aria-hidden="true">
+      <span class="splash-marco-esquina esq-si"></span>
+      <span class="splash-marco-esquina esq-sd"></span>
+      <span class="splash-marco-esquina esq-ii"></span>
+      <span class="splash-marco-esquina esq-id"></span>
+    </div>
+    <div class="splash-aura" aria-hidden="true"></div>
+
+    <canvas id="splash-canvas" class="splash-canvas"></canvas>
+
+    <div class="splash-contenido">
+      <span class="splash-etiqueta-top">Bienvenidos a nuestro atelier dulce</span>
+
+      <div class="splash-centro-logo">
+        <div class="splash-anillo-ext"></div>
+        <div class="splash-anillo-int"></div>
+        <div class="splash-rayos"></div>
+        <div class="splash-onda"></div>
+        <div class="splash-onda splash-onda-2"></div>
+
+        <svg class="splash-emblema" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="54" stroke="#f2d5a7" stroke-width="2.4" class="splash-trazo"/>
+          <circle cx="60" cy="60" r="46" stroke="rgba(246,222,192,0.45)" stroke-width="1.2"/>
+          <!-- Pastel de gala -->
+          <path d="M32 82 H88" stroke="#f6dec0" stroke-width="2.8" stroke-linecap="round"/>
+          <rect x="38" y="60" width="44" height="22" rx="4" stroke="#f6dec0" stroke-width="2.4" class="splash-trazo"/>
+          <rect x="46" y="42" width="28" height="18" rx="4" stroke="#f6dec0" stroke-width="2.4" class="splash-trazo"/>
+          <path d="M38 67 Q45 73 52 67 Q60 73 68 67 Q75 73 82 67" stroke="#e89ca8" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="60" cy="34" r="4.5" fill="#f2d5a7"/>
+          <path d="M60 29 Q64 22 69 25" stroke="#f6dec0" stroke-width="2" stroke-linecap="round"/>
+          <!-- Estrellas -->
+          <path d="M25 34 L27.5 28 L30 34 L36 36.5 L30 39 L27.5 45 L25 39 L19 36.5 Z" fill="#f6dec0"/>
+          <path d="M92 28 L94 23 L96 28 L101 30 L96 32 L94 37 L92 32 L87 30 Z" fill="#d6b27c"/>
+        </svg>
+      </div>
+
+      <div class="splash-titulo">Dulce Hogar</div>
+      <div class="splash-linea-sub">
+        <span class="splash-subtitulo">Repostería</span>
+      </div>
+      <p class="splash-lema">Alta pastelería artesanal · Las Palomas, Santiago</p>
+      <div class="splash-barra"><div class="splash-progreso"></div></div>
+      <button type="button" id="splash-saltar" class="splash-saltar">♪ Entrar con música</button>
+    </div>
+  </div>
+
+  <!-- 2. ENCABEZADO Y MENÚ -->
+  <header>
+    <div class="contenedor barra-nav">
+      <a href="#inicio" class="logo" data-ir="inicio">
+        <span class="logo-texto">Dulce Hogar</span>
+        <span class="logo-sub">Repostería</span>
+      </a>
+
+      <button
+        type="button"
+        class="boton-menu-movil"
+        id="boton-menu-movil"
+        aria-label="Abrir o cerrar menú"
+        aria-expanded="false"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="#inicio" data-ir="inicio" class="activo-nav">Inicio</a></li>
+          <li><a href="#productos" data-ir="productos">Productos</a></li>
+          <li><a href="#pedidos" data-ir="pedidos">Pedidos</a></li>
+          <li><a href="#contacto" data-ir="contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================
+         PANTALLA 1: INICIO
+         ========================================================== -->
+    <section id="inicio" class="pantalla activa">
+      <div class="inicio">
+        <div class="contenedor inicio-grid">
+          <div>
+            <span class="insignia-ubicacion">Las Palomas · Licey al Medio, Santiago</span>
+            <h1>Repostería artesanal con elegancia y sabor casero</h1>
+            <p>
+              Creamos bizcochos, galletas y postres finos por encargo para tus cumpleaños,
+              bautizos y celebraciones especiales, preparados con dedicación familiar.
+            </p>
+
+            <div class="acciones-inicio">
+              <a href="#pedidos" class="boton-principal" data-ir="pedidos">Haz tu pedido</a>
+              <a href="#productos" class="boton-secundario" data-ir="productos">Ver catálogo</a>
+            </div>
+
+            <div class="sellos-confianza">
+              <span><strong>100% Artesanal</strong>Recetas de familia</span>
+              <span><strong>A tu Medida</strong>Libras, colores y diseño</span>
+              <span><strong>Internacional</strong>Postres de autor y coquette</span>
+            </div>
+          </div>
+
+          <div class="tarjeta-portada">
+            <img
+              src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1100&q=80"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1622063531136-e7efff4ece72?auto=format&fit=crop&w=1100&q=80';"
+              alt="Bizcocho artesanal de Dulce Hogar Repostería"
+            >
+            <div class="etiqueta-flotante">
+              <div>
+                <strong>Dulce Hogar Repostería</strong>
+                <span>Cumpleaños, bautizos y eventos</span>
+              </div>
+              <span>Desde RD$ 175</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contenedor colecciones-inicio">
+        <div class="cabecera-seccion">
+          <span class="etiqueta">Explora nuestra vitrina</span>
+          <h2>¿Qué deseas ordenar hoy?</h2>
+          <p>Selecciona una categoría para entrar al catálogo y personalizar tu postre por libras, colores y estilo.</p>
+        </div>
+
+        <div class="grid-colecciones">
+          <div class="tarjeta-coleccion" data-abrir-categoria="clasicos">
+            <span>Favoritos de la casa</span>
+            <h3>Clásicos Dominicanos</h3>
+            <p>Bizcochos de vainilla, chocolate, piña, galletas de avena, flan y tres leches.</p>
+            <span class="enlace-falso">Ver los 6 clásicos →</span>
+          </div>
+
+          <div class="tarjeta-coleccion" data-abrir-categoria="especiales">
+            <span>Tendencia y diseño</span>
+            <h3>Coquette, Carlotas y Helados</h3>
+            <p>Cheesecake, carlota de limón, bizcochos de helado y gelatinas coquette de animalitos y lazos.</p>
+            <span class="enlace-falso">Explorar especiales →</span>
+          </div>
+
+          <div class="tarjeta-coleccion" data-abrir-categoria="internacional">
+            <span>Alta pastelería mundial</span>
+            <h3>Postres Extranjeros</h3>
+            <p>Tiramisú italiano, macarons franceses, crème brûlée y pavlova australiana.</p>
+            <span class="enlace-falso">Descubrir sabores del mundo →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PANTALLA 2: PRODUCTOS
+         ========================================================== -->
+    <section id="productos" class="pantalla seccion-bloque">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <span class="etiqueta">Catálogo Exclusivo</span>
+          <h2>Nuestros Productos</h2>
+          <p>Toca cualquier producto para abrir su pantalla de personalización (libras, colores, relleno y dedicatoria).</p>
+        </div>
+
+        <div class="barra-filtros" role="group" aria-label="Filtrar productos">
+          <button type="button" class="boton-filtro activo" data-filtro="todos">Todos (14)</button>
+          <button type="button" class="boton-filtro" data-filtro="clasicos">Clásicos de la Casa (6)</button>
+          <button type="button" class="boton-filtro" data-filtro="especiales">Especiales &amp; Coquette</button>
+          <button type="button" class="boton-filtro" data-filtro="internacional">Internacional</button>
+        </div>
+
+        <div class="grid-productos" id="contenedor-productos"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PANTALLA 3: DETALLE Y PERSONALIZACIÓN
+         ========================================================== -->
+    <section id="detalle-producto" class="pantalla seccion-bloque">
+      <div class="contenedor">
+        <button type="button" class="boton-volver" id="boton-volver-catalogo">
+          ← Volver a Productos
+        </button>
+
+        <div class="detalle-grid">
+          <div>
+            <div class="detalle-foto-caja">
+              <img id="detalle-imagen" src="" alt="">
+              <span class="badge-origen" id="detalle-origen"></span>
+            </div>
+
+            <div class="vista-previa-estilo">
+              <h4>Tu diseño seleccionado</h4>
+              <div class="muestra-color-activa">
+                <span class="circulo-preview" id="preview-circulo"></span>
+                <span id="preview-texto">Selecciona un color y estilo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detalle-info">
+            <span class="tipo-producto" id="detalle-categoria"></span>
+            <h2 id="detalle-nombre"></h2>
+            <p id="detalle-descripcion"></p>
+
+            <div class="precio-vivo-caja">
+              <span>Total estimado:</span>
+              <strong id="detalle-precio-vivo">RD$ 0</strong>
+            </div>
+
+            <div class="bloque-opcion">
+              <span class="bloque-opcion-titulo">1. Elige tamaño / libras:</span>
+              <div class="lista-chips" id="opciones-tamano"></div>
+            </div>
+
+            <div class="bloque-opcion">
+              <span class="bloque-opcion-titulo">2. Colores y decoración:</span>
+              <div class="lista-chips" id="opciones-color"></div>
+            </div>
+
+            <div class="bloque-opcion">
+              <span class="bloque-opcion-titulo">3. Relleno o detalle especial:</span>
+              <div class="lista-chips" id="opciones-relleno"></div>
+            </div>
+
+            <div class="bloque-opcion">
+              <label for="detalle-dedicatoria">4. Dedicatoria o figura deseada (opcional):</label>
+              <input
+                type="text"
+                id="detalle-dedicatoria"
+                placeholder="Ej: Feliz Cumpleaños Sofía, lazos rosa, osito pastel..."
+              >
+            </div>
+
+            <button type="button" class="boton-confirmar-personalizacion" id="boton-ir-a-pedir">
+              Llevar esta personalización al Pedido →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PANTALLA 4: PEDIDOS (FORMULARIO)
+         ========================================================== -->
+    <section id="pedidos" class="pantalla seccion-bloque">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <span class="etiqueta">Encargos</span>
+          <h2>Haz tu Pedido</h2>
+          <p>Completa tus datos y la fecha de entrega. Confirmaremos tu solicitud directamente.</p>
+        </div>
+
+        <div class="caja-formulario">
+          <div id="resumen-seleccion" class="resumen-seleccion">
+            <strong>Personalización cargada:</strong>
+            <div id="texto-seleccion" style="margin-top: 4px;"></div>
+          </div>
+
+          <form id="formulario-pedido" novalidate>
+            <div class="grupo-campo">
+              <label for="nombre">Nombre completo <span class="obligatorio">*</span></label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej: Camila Jiménez" required>
+            </div>
+
+            <div class="fila-doble">
+              <div class="grupo-campo">
+                <label for="telefono">Teléfono / WhatsApp <span class="obligatorio">*</span></label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 809-000-0000" required>
+              </div>
+
+              <div class="grupo-campo">
+                <label for="correo">Correo electrónico <span class="obligatorio">*</span></label>
+                <input type="email" id="correo" name="correo" placeholder="Ej: cliente@correo.com" required>
+              </div>
+            </div>
+
+            <div class="fila-doble">
+              <div class="grupo-campo">
+                <label for="producto">Producto <span class="obligatorio">*</span></label>
+                <select id="producto" name="producto" required>
+                  <option value="">-- Selecciona un producto --</option>
+                  <option value="Bizcocho de vainilla (RD$ 650)">Bizcocho de vainilla (RD$ 650)</option>
+                  <option value="Bizcocho de chocolate (RD$ 700)">Bizcocho de chocolate (RD$ 700)</option>
+                  <option value="Bizcocho de piña (RD$ 1,300)">Bizcocho de piña (RD$ 1,300)</option>
+                  <option value="Galletas de avena (RD$ 250 la docena)">Galletas de avena (RD$ 250 la docena)</option>
+                  <option value="Flan de caramelo (RD$ 400)">Flan de caramelo (RD$ 400)</option>
+                  <option value="Tres leches (RD$ 175 la porción)">Tres leches (RD$ 175 la porción)</option>
+                  <option value="Carlota de Limón y Frutos Rojos (RD$ 550)">Carlota de Limón y Frutos Rojos (RD$ 550)</option>
+                  <option value="Cheesecake de Fresa New York (RD$ 950)">Cheesecake de Fresa New York (RD$ 950)</option>
+                  <option value="Bizcocho de Helado (RD$ 1,450)">Bizcocho de Helado (RD$ 1,450)</option>
+                  <option value="Gelatinas Artísticas Coquette (RD$ 600)">Gelatinas Artísticas Coquette (RD$ 600)</option>
+                  <option value="Tiramisú Italiano (RD$ 480)">Tiramisú Italiano (RD$ 480)</option>
+                  <option value="Macarons Franceses - 12 uds (RD$ 850)">Macarons Franceses - 12 uds (RD$ 850)</option>
+                  <option value="Pavlova Australiana con Frutas (RD$ 750)">Pavlova Australiana con Frutas (RD$ 750)</option>
+                  <option value="Crème Brûlée Francés (RD$ 420)">Crème Brûlée Francés (RD$ 420)</option>
+                </select>
+              </div>
+
+              <div class="grupo-campo">
+                <label for="fecha">Fecha de entrega <span class="obligatorio">*</span></label>
+                <input type="date" id="fecha" name="fecha" required>
+              </div>
+            </div>
+
+            <div class="grupo-campo">
+              <label for="comentarios">Comentarios (libras, colores, dedicatoria)</label>
+              <textarea id="comentarios" name="comentarios" rows="3" placeholder="Ej: 2 libras, color rosa pastel coquette, lazos y perlas..."></textarea>
+            </div>
+
+            <button type="submit" class="boton-enviar">Confirmar Pedido</button>
+
+            <div id="mensaje-formulario" class="mensaje-formulario" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PANTALLA 5: CONTACTO
+         ========================================================== -->
+    <section id="contacto" class="pantalla seccion-bloque">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <span class="etiqueta">Visítanos o Escríbenos</span>
+          <h2>Contacto</h2>
+          <p>Estamos ubicados en Las Palomas, Licey al Medio, Santiago, listos para preparar tu próximo postre.</p>
+        </div>
+
+        <div class="grid-contacto">
+          <div class="tarjeta-contacto">
+            <div class="icono-circulo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 21s-7-6.2-7-11.5a7 7 0 1 1 14 0C19 14.8 12 21 12 21z"/>
+                <circle cx="12" cy="9.5" r="2.5"/>
+              </svg>
+            </div>
+            <h3>Dirección</h3>
+            <p>Calle Principal #12, Las Palomas, Licey al Medio, Santiago</p>
+          </div>
+
+          <div class="tarjeta-contacto">
+            <div class="icono-circulo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 2"/>
+              </svg>
+            </div>
+            <h3>Horario</h3>
+            <p>Lunes a sábado<br>8:00 a. m. – 6:00 p. m.</p>
+          </div>
+
+          <div class="tarjeta-contacto">
+            <div class="icono-circulo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <h3>WhatsApp</h3>
+            <p>809-000-0000</p>
+            <a
+              href="https://wa.me/18090000000?text=Hola%20Dulce%20Hogar%20Reposter%C3%ADa%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="boton-whatsapp"
+            >
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTÓN DISCRETO DE MÚSICA RELAJANTE -->
+  <button type="button" id="control-musica" class="control-musica" aria-label="Activar o pausar música relajante">
+    <span class="barras-musica" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+    <span id="texto-musica">Activar música</span>
+  </button>
+
+  <!-- MUÑECO ANIMADO QUE SALUDA Y HABLA -->
+  <aside class="asistente-mascota" aria-label="Asistente de bienvenida">
+    <div id="globo-saludo" class="globo-saludo" role="status">
+      <button type="button" id="cerrar-globo" class="cerrar-globo" aria-label="Cerrar saludo">×</button>
+      <strong id="globo-titulo">¡Bienvenidos a Dulce Hogar!</strong>
+      <span id="globo-mensaje">Soy tu asistente pastelera. Explora nuestro catálogo o personaliza tu bizcocho.</span>
+    </div>
+
+    <button type="button" id="muneco-boton" class="muneco-boton" aria-label="Saludar o mostrar mensaje de bienvenida">
+      <svg class="muneco-svg" viewBox="0 0 120 125" xmlns="http://www.w3.org/2000/svg">
+        <path d="M36 42 C28 32, 36 16, 48 20 C53 11, 67 11, 72 20 C84 16, 92 32, 84 42 Z" fill="#ffffff" stroke="#d6b27c" stroke-width="2"/>
+        <rect x="38" y="38" width="44" height="8" rx="3" fill="#5c1e33"/>
+        <circle cx="60" cy="42" r="3" fill="#d6b27c"/>
+
+        <path d="M35 55 C35 38, 85 38, 85 55 L87 72 C80 70, 77 65, 76 58 C68 62, 52 62, 44 58 C43 65, 40 70, 33 72 Z" fill="#4a252c"/>
+        <circle cx="60" cy="62" r="21" fill="#f7d6c4"/>
+
+        <ellipse cx="47" cy="67" rx="4" ry="2.2" fill="#e89ca8" opacity="0.7"/>
+        <ellipse cx="73" cy="67" rx="4" ry="2.2" fill="#e89ca8" opacity="0.7"/>
+
+        <g class="ojo-parpadeo">
+          <circle cx="52" cy="60" r="2.7" fill="#2b171d"/>
+          <circle cx="53" cy="59" r="0.9" fill="#ffffff"/>
+          <circle cx="68" cy="60" r="2.7" fill="#2b171d"/>
+          <circle cx="69" cy="59" r="0.9" fill="#ffffff"/>
+        </g>
+
+        <path d="M54 70 Q60 75 66 70" stroke="#5c1e33" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <path d="M39 108 C40 88, 48 82, 60 82 C72 82, 80 88, 81 108 Z" fill="#ffffff" stroke="#ebd9de" stroke-width="1.8"/>
+        <path d="M54 83 L60 89 L66 83" fill="none" stroke="#5c1e33" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="60" cy="94" r="2" fill="#c87d87"/>
+        <circle cx="60" cy="101" r="2" fill="#c87d87"/>
+
+        <path d="M40 90 Q30 96 34 104" stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <circle cx="33" cy="102" r="5" fill="#f7d6c4"/>
+        <path d="M26 98 L34 98 L33 104 L27 104 Z" fill="#d6b27c"/>
+        <path d="M25 98 Q30 91 35 98 Z" fill="#c87d87"/>
+
+        <g class="brazo-saludo">
+          <path d="M81 90 Q94 82 97 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <circle cx="97" cy="68" r="5.5" fill="#f7d6c4"/>
+        </g>
+      </svg>
+    </button>
+  </aside>
+
+  <footer>
+    <p>Dulce Hogar Repostería · Calle Principal #12, Las Palomas, Licey al Medio, Santiago</p>
+  </footer>
+
+  <!-- ==========================================================
+       JAVASCRIPT: MÚSICA RELAJANTE, EXPLOSIÓN + BOKEH, MUÑECO Y PANTALLAS
+       ========================================================== -->
+  <script>
+    // ----------------------------------------------------------
+    // 0. CANCIÓN INSTRUMENTAL RELAJANTE Y ELEGANTE (WEB AUDIO)
+    //    Melodía suave estilo piano / celesta de pastelería francesa
+    // ----------------------------------------------------------
+    const btnMusica = document.getElementById('control-musica');
+    const txtMusica = document.getElementById('texto-musica');
+
+    let audioCtx = null;
+    let masterGain = null;
+    let delayNode = null;
+    let musicaActiva = false;
+    let musicaPausadaManualmente = false;
+    let intervaloMelodia = null;
+    let pasoActual = 0;
+
+    // Frecuencias de notas musicales (Hz) para progresión relajante Cmaj7 - Am9 - Fmaj7 - G6
+    const NOTAS = {
+      F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+      C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99
+    };
+
+    // Secuencia de 8 compases suaves (bajo cálido + arpegio + melodía elegante)
+    const COMPASES = [
+      { bajo: 'C4', arp: ['E4', 'G4', 'B4', 'E5', 'B4', 'G4'] },
+      { bajo: 'A3', arp: ['E4', 'G4', 'B4', 'C5', 'E5', 'B4'] },
+      { bajo: 'F3', arp: ['C4', 'E4', 'A4', 'C5', 'A4', 'E4'] },
+      { bajo: 'G3', arp: ['D4', 'G4', 'B4', 'D5', 'B4', 'G4'] },
+      { bajo: 'E4', arp: ['G4', 'B4', 'D5', 'G5', 'D5', 'B4'] },
+      { bajo: 'A3', arp: ['E4', 'G4', 'C5', 'E5', 'C5', 'G4'] },
+      { bajo: 'D4', arp: ['A4', 'C5', 'E5', 'F5', 'E5', 'C5'] },
+      { bajo: 'G3', arp: ['D4', 'F4', 'B4', 'D5', 'B4', 'G4'] }
+    ];
+
+    function inicializarAudio() {
+      if (audioCtx) return;
+      const AudioContexto = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContexto) return;
+
+      audioCtx = new AudioContexto();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.001;
+
+      // Eco suave tipo salón elegante
+      delayNode = audioCtx.createDelay();
+      delayNode.delayTime.value = 0.42;
+
+      const feedback = audioCtx.createGain();
+      feedback.gain.value = 0.34;
+
+      const filtroEco = audioCtx.createBiquadFilter();
+      filtroEco.type = 'lowpass';
+      filtroEco.frequency.value = 1100;
+
+      delayNode.connect(filtroEco);
+      filtroEco.connect(feedback);
+      feedback.connect(delayNode);
+      filtroEco.connect(masterGain);
+
+      masterGain.connect(audioCtx.destination);
+    }
+
+    function tocarNotaSuave(freq, duracion, volumen, esBajo) {
+      if (!audioCtx || !musicaActiva) return;
+
+      const ahora = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const oscArm = audioCtx.createOscillator();
+      const filtro = audioCtx.createBiquadFilter();
+      const ganancia = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ahora);
+
+      oscArm.type = 'triangle';
+      oscArm.frequency.setValueAtTime(esBajo ? freq : freq * 2, ahora);
+
+      const ganArm = audioCtx.createGain();
+      ganArm.gain.value = esBajo ? 0.08 : 0.12;
+
+      filtro.type = 'lowpass';
+      filtro.frequency.setValueAtTime(esBajo ? 480 : 1450, ahora);
+
+      ganancia.gain.setValueAtTime(0.0001, ahora);
+      ganancia.gain.linearRampToValueAtTime(volumen, ahora + (esBajo ? 0.18 : 0.045));
+      ganancia.gain.exponentialRampToValueAtTime(0.0001, ahora + duracion);
+
+      osc.connect(filtro);
+      oscArm.connect(ganArm);
+      ganArm.connect(filtro);
+      filtro.connect(ganancia);
+
+      ganancia.connect(masterGain);
+      if (!esBajo && delayNode) {
+        ganancia.connect(delayNode);
+      }
+
+      osc.start(ahora);
+      oscArm.start(ahora);
+      osc.stop(ahora + duracion + 0.05);
+      oscArm.stop(ahora + duracion + 0.05);
+    }
+
+    function avanzarMelodia() {
+      if (!musicaActiva || !audioCtx || audioCtx.state !== 'running') return;
+
+      const compasIndex = Math.floor(pasoActual / 6) % COMPASES.length;
+      const notaIndex = pasoActual % 6;
+      const compas = COMPASES[compasIndex];
+
+      if (notaIndex === 0) {
+        tocarNotaSuave(NOTAS[compas.bajo], 2.7, 0.14, true);
+      }
+
+      const nombreNota = compas.arp[notaIndex];
+      const volumenNota = notaIndex === 3 ? 0.12 : 0.085;
+      tocarNotaSuave(NOTAS[nombreNota], 1.65, volumenNota, false);
+
+      pasoActual++;
+    }
+
+    function iniciarMusica() {
+      if (musicaPausadaManualmente && arguments[0] !== true) return;
+
+      inicializarAudio();
+      if (!audioCtx) return;
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().then(activarLoopMusica).catch(function () {});
+      } else {
+        activarLoopMusica();
+      }
+    }
+
+    function activarLoopMusica() {
+      if (musicaActiva) return;
+      musicaActiva = true;
+      musicaPausadaManualmente = false;
+
+      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.75, audioCtx.currentTime + 0.8);
+
+      if (!intervaloMelodia) {
+        avanzarMelodia();
+        intervaloMelodia = setInterval(avanzarMelodia, 460);
+      }
+
+      btnMusica.classList.add('sonando');
+      txtMusica.textContent = 'Música: On';
+    }
+
+    function pausarMusica() {
+      musicaActiva = false;
+      musicaPausadaManualmente = true;
+      if (masterGain && audioCtx) {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+      }
+      btnMusica.classList.remove('sonando');
+      txtMusica.textContent = 'Música: Off';
+    }
+
+    btnMusica.addEventListener('click', function () {
+      if (musicaActiva) {
+        pausarMusica();
+      } else {
+        iniciarMusica(true);
+      }
+    });
+
+    // Intento suave de inicio + desbloqueo automático en el primer toque/clic
+    try {
+      inicializarAudio();
+      if (audioCtx && audioCtx.state === 'running') {
+        activarLoopMusica();
+      }
+    } catch (e) {}
+
+    document.addEventListener('pointerdown', function desbloquearAudio() {
+      if (!musicaPausadaManualmente && !musicaActiva) {
+        iniciarMusica();
+      }
+    }, { once: true });
+
+    // ----------------------------------------------------------
+    // 0.1 ANIMACIÓN EXPLOSIVA DE ENTRADA (BOKEH + EXPLOSIONES + TELÓN)
+    // ----------------------------------------------------------
+    const splash = document.getElementById('splash-inicio');
+    const btnSaltarSplash = document.getElementById('splash-saltar');
+    const splashCanvas = document.getElementById('splash-canvas');
+    const ctx = splashCanvas.getContext('2d');
+
+    let animacionSplashActiva = true;
+    let splashCerrado = false;
+    const particulas = [];
+    const ondasCanvas = [];
+    const lucesBokeh = [];
+    const COLORES_FIESTA = ['#f6dec0', '#d6b27c', '#e89ca8', '#c87d87', '#ffffff', '#f5b8c8'];
+
+    function ajustarCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      splashCanvas.width = window.innerWidth * dpr;
+      splashCanvas.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function crearLucesBokeh() {
+      lucesBokeh.length = 0;
+      const total = window.innerWidth < 600 ? 22 : 38;
+      for (let i = 0; i < total; i++) {
+        lucesBokeh.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          radio: 4 + Math.random() * 18,
+          vy: -0.35 - Math.random() * 0.75,
+          vx: (Math.random() - 0.5) * 0.35,
+          alpha: 0.08 + Math.random() * 0.22,
+          color: Math.random() < 0.6 ? '#f6dec0' : '#e89ca8',
+          pulso: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function crearExplosion(cx, cy, cantidad) {
+      ondasCanvas.push({
+        x: cx,
+        y: cy,
+        radio: 12,
+        alpha: 0.9
+      });
+
+      for (let i = 0; i < cantidad; i++) {
+        const angulo = Math.random() * Math.PI * 2;
+        const velocidad = 2.6 + Math.random() * 10.5;
+        const tipo = Math.random() < 0.45 ? 'estrella' : (Math.random() < 0.75 ? 'confeti' : 'chispa');
+
+        particulas.push({
+          x: cx,
+          y: cy,
+          vx: Math.cos(angulo) * velocidad,
+          vy: Math.sin(angulo) * velocidad - 2,
+          tamano: tipo === 'confeti' ? (5 + Math.random() * 6.5) : (2.5 + Math.random() * 4.2),
+          color: COLORES_FIESTA[Math.floor(Math.random() * COLORES_FIESTA.length)],
+          alpha: 1,
+          decaimiento: 0.0065 + Math.random() * 0.0085,
+          gravedad: 0.13,
+          tipo: tipo,
+          giro: Math.random() * Math.PI * 2,
+          velGiro: (Math.random() - 0.5) * 0.25
+        });
+      }
+    }
+
+    function dibujarEstrella(x, y, radio, color, alpha, rotacion) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotacion);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      for (let i = 0; i < 4; i++) {
+        const ang = (i * Math.PI) / 2;
+        ctx.lineTo(Math.cos(ang) * radio * 1.65, Math.sin(ang) * radio * 1.65);
+        ctx.lineTo(Math.cos(ang + Math.PI / 4) * radio * 0.45, Math.sin(ang + Math.PI / 4) * radio * 0.45);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animarParticulas() {
+      if (!animacionSplashActiva) return;
+
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      // Luces bokeh suaves que llenan todo el fondo continuamente
+      for (let i = 0; i < lucesBokeh.length; i++) {
+        const b = lucesBokeh[i];
+        b.y += b.vy;
+        b.x += b.vx;
+        b.pulso += 0.04;
+        if (b.y < -30) {
+          b.y = window.innerHeight + 30;
+          b.x = Math.random() * window.innerWidth;
+        }
+        ctx.save();
+        ctx.globalAlpha = b.alpha * (0.75 + 0.25 * Math.sin(b.pulso));
+        ctx.fillStyle = b.color;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.radio, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Ondas doradas expansivas
+      for (let i = ondasCanvas.length - 1; i >= 0; i--) {
+        const o = ondasCanvas[i];
+        o.radio += 10.5;
+        o.alpha *= 0.935;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(o.x, o.y, o.radio, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(246, 222, 192, ${o.alpha})`;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        ctx.restore();
+        if (o.alpha < 0.03) ondasCanvas.splice(i, 1);
+      }
+
+      // Partículas de fuegos y confeti
+      for (let i = particulas.length - 1; i >= 0; i--) {
+        const p = particulas[i];
+        p.vx *= 0.976;
+        p.vy = p.vy * 0.976 + p.gravedad;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.giro += p.velGiro;
+        p.alpha -= p.decaimiento;
+
+        if (p.alpha <= 0) {
+          particulas.splice(i, 1);
+          continue;
+        }
+
+        if (p.tipo === 'estrella') {
+          dibujarEstrella(p.x, p.y, p.tamano, p.color, p.alpha, p.giro);
+        } else if (p.tipo === 'confeti') {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.giro);
+          ctx.scale(Math.cos(p.giro * 2), 1);
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.tamano / 2, -p.tamano / 3, p.tamano, p.tamano * 0.65);
+          ctx.restore();
+        } else {
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.tamano, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      requestAnimationFrame(animarParticulas);
+    }
+
+    ajustarCanvas();
+    crearLucesBokeh();
+    window.addEventListener('resize', function () {
+      ajustarCanvas();
+      crearLucesBokeh();
+    });
+    animarParticulas();
+
+    const centroX = window.innerWidth / 2;
+    const centroY = window.innerHeight * 0.42;
+    setTimeout(() => crearExplosion(centroX, centroY, 95), 70);
+    setTimeout(() => crearExplosion(centroX - window.innerWidth * 0.22, centroY - 40, 55), 550);
+    setTimeout(() => crearExplosion(centroX + window.innerWidth * 0.22, centroY - 30, 55), 920);
+    setTimeout(() => crearExplosion(centroX, centroY + 15, 75), 1450);
+
+    function cerrarSplash() {
+      if (splashCerrado) return;
+      splashCerrado = true;
+      splash.classList.add('abrir-telon');
+      setTimeout(function () {
+        animacionSplashActiva = false;
+        splash.classList.add('oculto');
+      }, 950);
+    }
+
+    setTimeout(cerrarSplash, 3600);
+    btnSaltarSplash.addEventListener('click', function () {
+      iniciarMusica(true);
+      cerrarSplash();
+    });
+
+    // ----------------------------------------------------------
+    // 0.2 MUÑECO ANIMADO CON MENSAJES SEGÚN LA PANTALLA
+    // ----------------------------------------------------------
+    const globoSaludo = document.getElementById('globo-saludo');
+    const globoTitulo = document.getElementById('globo-titulo');
+    const globoMensaje = document.getElementById('globo-mensaje');
+    const btnMuneco = document.getElementById('muneco-boton');
+    const btnCerrarGlobo = document.getElementById('cerrar-globo');
+
+    const MENSAJES_ASISTENTE = {
+      inicio: {
+        titulo: '¡Bienvenidos a Dulce Hogar!',
+        texto: 'Soy tu asistente pastelera. Toca "Ver catálogo" para elegir tu postre favorito.'
+      },
+      productos: {
+        titulo: '¡Cuántas delicias!',
+        texto: 'Toca cualquier producto para elegir libras, colores coquette y dedicatoria.'
+      },
+      'detalle-producto': {
+        titulo: '¡Personalízalo a tu gusto!',
+        texto: 'Combina tamaño, colores y relleno. El precio se actualiza al instante.'
+      },
+      pedidos: {
+        titulo: '¡Ya casi está listo!',
+        texto: 'Completa tus datos y fecha de entrega para confirmar tu encargo.'
+      },
+      contacto: {
+        titulo: '¡Estamos para servirte!',
+        texto: 'Escríbenos por WhatsApp si necesitas ayuda con un evento especial.'
+      }
+    };
+
+    function actualizarMensajeMuneco(idPantalla) {
+      const info = MENSAJES_ASISTENTE[idPantalla] || MENSAJES_ASISTENTE.inicio;
+      globoTitulo.textContent = info.titulo;
+      globoMensaje.textContent = info.texto;
+    }
+
+    btnCerrarGlobo.addEventListener('click', function () {
+      globoSaludo.classList.add('cerrado');
+    });
+
+    btnMuneco.addEventListener('click', function () {
+      globoSaludo.classList.toggle('cerrado');
+    });
+
+    // ----------------------------------------------------------
+    // DATOS DE LOS 14 PRODUCTOS
+    // ----------------------------------------------------------
+    const PRODUCTOS = [
+      {
+        id: 'vainilla',
+        nombre: 'Bizcocho de vainilla',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'República Dominicana',
+        precioBase: 650,
+        precioTexto: 'RD$ 650',
+        selectValue: 'Bizcocho de vainilla (RD$ 650)',
+        tipoTamano: 'libras',
+        descripcion: 'Miga suave y esponjosa con esencia natural de vainilla y suspiro o buttercream sedoso.',
+        imagen: 'https://images.unsplash.com/photo-1770377248978-e56dfe4e504c?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1536599524557-5f784dd53282?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'chocolate',
+        nombre: 'Bizcocho de chocolate',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'República Dominicana',
+        precioBase: 700,
+        precioTexto: 'RD$ 700',
+        selectValue: 'Bizcocho de chocolate (RD$ 700)',
+        tipoTamano: 'libras',
+        descripcion: 'Bizcocho húmedo de cacao intenso cubierto con ganache brillante de chocolate.',
+        imagen: 'https://images.unsplash.com/photo-1540337706094-da10342c93d8?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1772196229845-9addc8cccdee?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'pina',
+        nombre: 'Bizcocho de piña',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'Tradición Dominicana',
+        precioBase: 1300,
+        precioTexto: 'RD$ 1,300',
+        selectValue: 'Bizcocho de piña (RD$ 1,300)',
+        tipoTamano: 'libras',
+        descripcion: 'Clásico dominicano relleno de mermelada artesanal de piña con acabado festivo elegante.',
+        imagen: 'https://images.unsplash.com/photo-1643998302322-4ca6a9fc7316?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1643910509764-1add565de3e4?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'galletas',
+        nombre: 'Galletas de avena',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'Horneado Artesanal',
+        precioBase: 250,
+        precioTexto: 'RD$ 250 la docena',
+        selectValue: 'Galletas de avena (RD$ 250 la docena)',
+        tipoTamano: 'docena',
+        descripcion: 'Crujientes por fuera y tiernas por dentro, aromatizadas con canela y mantequilla.',
+        imagen: 'https://images.unsplash.com/photo-1631311253861-52eaf0337adb?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1600147573971-a2135dbff47e?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'flan',
+        nombre: 'Flan de caramelo',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'Postre Tradicional',
+        precioBase: 400,
+        precioTexto: 'RD$ 400',
+        selectValue: 'Flan de caramelo (RD$ 400)',
+        tipoTamano: 'postre',
+        descripcion: 'Flan cremoso de vainilla horneado a baño María con caramelo ámbar dorado.',
+        imagen: 'https://images.unsplash.com/photo-1653988354010-39637252a2db?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1709880194932-8f33d90bdae8?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'tres-leches',
+        nombre: 'Tres leches',
+        categoria: 'clasicos',
+        etiqueta: 'Clásico de la Casa',
+        origen: 'Favorito Latino',
+        precioBase: 175,
+        precioTexto: 'RD$ 175 la porción',
+        selectValue: 'Tres leches (RD$ 175 la porción)',
+        tipoTamano: 'porcion',
+        descripcion: 'Bizcocho bien húmedo en mezcla de tres leches con merengue ligero y canela.',
+        imagen: 'https://images.unsplash.com/photo-1777389189801-56931d76e2ab?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1508737690671-77fe4101791e?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'carlota',
+        nombre: 'Carlota de Limón y Frutos Rojos',
+        categoria: 'especiales',
+        etiqueta: 'Postre Frío',
+        origen: 'Especialidad de la Casa',
+        precioBase: 550,
+        precioTexto: 'RD$ 550',
+        selectValue: 'Carlota de Limón y Frutos Rojos (RD$ 550)',
+        tipoTamano: 'postre',
+        descripcion: 'Capas refrescantes de crema cítrica de limón, galleta fina y frutos rojos frescos.',
+        imagen: 'https://images.unsplash.com/photo-1541781622821-8af65b6b449f?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1786269188368-91104c005a3d?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'cheesecake',
+        nombre: 'Cheesecake de Fresa New York',
+        categoria: 'especiales',
+        etiqueta: 'Alta Pastelería',
+        origen: 'Estados Unidos',
+        precioBase: 950,
+        precioTexto: 'RD$ 950',
+        selectValue: 'Cheesecake de Fresa New York (RD$ 950)',
+        tipoTamano: 'libras',
+        descripcion: 'Cheesecake horneado ultracremoso sobre base crocante con coulis y fresas naturales.',
+        imagen: 'https://images.unsplash.com/photo-1673551494394-23b13e77e58b?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1756550641128-ced5a4cf3e90?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'bizcocho-helado',
+        nombre: 'Bizcocho de Helado',
+        categoria: 'especiales',
+        etiqueta: 'Edición Helada',
+        origen: 'Fusión Gourmet',
+        precioBase: 1450,
+        precioTexto: 'RD$ 1,450',
+        selectValue: 'Bizcocho de Helado (RD$ 1,450)',
+        tipoTamano: 'libras',
+        descripcion: 'Combinación irresistible de bizcocho suave y capas de helado cremoso personalizable.',
+        imagen: 'https://images.unsplash.com/photo-1757521431392-27d1fcb36c56?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1676300184760-aa72b43f13cb?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'gelatina-coquette',
+        nombre: 'Gelatinas Artísticas Coquette',
+        categoria: 'especiales',
+        etiqueta: 'Diseño Coquette',
+        origen: 'Tendencia Pastel',
+        precioBase: 600,
+        precioTexto: 'RD$ 600',
+        selectValue: 'Gelatinas Artísticas Coquette (RD$ 600)',
+        tipoTamano: 'postre',
+        descripcion: 'Delicadas gelatinas de leche y fruta en formas elegantes de animalitos coquette, lazos y corazones pastel.',
+        imagen: 'https://images.unsplash.com/photo-1583106845380-22cd14954c85?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1787550275377-9f54a07c68c8?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'tiramisu',
+        nombre: 'Tiramisú Italiano',
+        categoria: 'internacional',
+        etiqueta: 'Postre Extranjero',
+        origen: 'Italia',
+        precioBase: 480,
+        precioTexto: 'RD$ 480',
+        selectValue: 'Tiramisú Italiano (RD$ 480)',
+        tipoTamano: 'porcion',
+        descripcion: 'Auténtica receta italiana con crema de mascarpone, bizcotelas al café espresso y cacao puro.',
+        imagen: 'https://images.unsplash.com/photo-1785389593866-a6f454865756?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1792354877283-24021379c78d?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'macarons',
+        nombre: 'Macarons Franceses (12 uds)',
+        categoria: 'internacional',
+        etiqueta: 'Postre Extranjero',
+        origen: 'Francia',
+        precioBase: 850,
+        precioTexto: 'RD$ 850',
+        selectValue: 'Macarons Franceses - 12 uds (RD$ 850)',
+        tipoTamano: 'docena',
+        descripcion: 'Elegantes bocados parisinos de almendra rellenos de ganache de frutos rojos, vainilla y pistacho.',
+        imagen: 'https://images.unsplash.com/photo-1702747558545-68b3dbbdc46e?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1490368168320-00b82f60dd71?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'pavlova',
+        nombre: 'Pavlova Australiana con Frutas',
+        categoria: 'internacional',
+        etiqueta: 'Postre Extranjero',
+        origen: 'Australia',
+        precioBase: 750,
+        precioTexto: 'RD$ 750',
+        selectValue: 'Pavlova Australiana con Frutas (RD$ 750)',
+        tipoTamano: 'postre',
+        descripcion: 'Merengue crujiente por fuera y nube suave por dentro, coronado con chantilly y berries frescos.',
+        imagen: 'https://images.unsplash.com/photo-1672504015242-798e5ec2c67f?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1778634304525-8da563b420e8?auto=format&fit=crop&w=900&q=80'
+      },
+      {
+        id: 'creme-brulee',
+        nombre: 'Crème Brûlée Francés',
+        categoria: 'internacional',
+        etiqueta: 'Postre Extranjero',
+        origen: 'Francia',
+        precioBase: 420,
+        precioTexto: 'RD$ 420',
+        selectValue: 'Crème Brûlée Francés (RD$ 420)',
+        tipoTamano: 'porcion',
+        descripcion: 'Crema sedosa de vainilla natural cubierta con fina lámina crujiente de caramelo tostado.',
+        imagen: 'https://images.unsplash.com/photo-1779094543236-6c64b71ae14e?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://images.unsplash.com/photo-1653988354010-39637252a2db?auto=format&fit=crop&w=900&q=80'
+      }
+    ];
+
+    const TAMANOS_POR_TIPO = {
+      libras: [
+        { etiqueta: '½ Libra', multiplicador: 0.75 },
+        { etiqueta: '1 Libra (Estándar)', multiplicador: 1 },
+        { etiqueta: '2 Libras', multiplicador: 1.85 },
+        { etiqueta: '3 Libras (Celebración)', multiplicador: 2.7 }
+      ],
+      docena: [
+        { etiqueta: '6 Unidades', multiplicador: 0.6 },
+        { etiqueta: '1 Docena (Estándar)', multiplicador: 1 },
+        { etiqueta: '2 Docenas', multiplicador: 1.9 }
+      ],
+      porcion: [
+        { etiqueta: '1 Porción', multiplicador: 1 },
+        { etiqueta: 'Caja de 4 Porciones', multiplicador: 3.7 },
+        { etiqueta: 'Bandeja Familiar (8)', multiplicador: 7 }
+      ],
+      postre: [
+        { etiqueta: 'Mediano (6–8 pers.)', multiplicador: 1 },
+        { etiqueta: 'Presentación Coquette / Regalo', multiplicador: 1.25 },
+        { etiqueta: 'Grande (12–15 pers.)', multiplicador: 1.65 }
+      ]
+    };
+
+    const COLORES_DISPONIBLES = [
+      { nombre: 'Rosa Coquette & Perlas', hex: '#f4b8c8' },
+      { nombre: 'Marfil & Dorado Champagne', hex: '#f0dec2' },
+      { nombre: 'Borgoña & Oro Rosa', hex: '#6d233c' },
+      { nombre: 'Lavanda Pastel', hex: '#d3c1f5' },
+      { nombre: 'Azul Cielo Pastel', hex: '#b8dcfa' },
+      { nombre: 'Cacao & Caramelo', hex: '#593329' }
+    ];
+
+    const RELLENOS_DISPONIBLES = [
+      'Crema de vainilla suave',
+      'Dulce de leche artesanal',
+      'Ganache de chocolate',
+      'Frutos rojos / fresa',
+      'Figuras coquette (lazos / animalitos)',
+      'Sin relleno adicional'
+    ];
+
+    // ----------------------------------------------------------
+    // 1. NAVEGACIÓN POR PANTALLAS SEPARADAS
+    // ----------------------------------------------------------
+    const pantallas = document.querySelectorAll('.pantalla');
+    const enlacesMenu = document.querySelectorAll('nav a');
+    const botonMenu = document.getElementById('boton-menu-movil');
+    const menuPrincipal = document.getElementById('menu-principal');
+
+    function mostrarPantalla(idPantalla, actualizarHash = true) {
+      const destino = document.getElementById(idPantalla) ? idPantalla : 'inicio';
+
+      pantallas.forEach(function (sec) {
+        sec.classList.remove('activa');
+      });
+      document.getElementById(destino).classList.add('activa');
+
+      enlacesMenu.forEach(function (a) {
+        a.classList.remove('activo-nav');
+        const ir = a.getAttribute('data-ir');
+        if (ir === destino || (destino === 'detalle-producto' && ir === 'productos')) {
+          a.classList.add('activo-nav');
+        }
+      });
+
+      menuPrincipal.classList.remove('abierto');
+      botonMenu.setAttribute('aria-expanded', 'false');
+
+      if (actualizarHash && destino !== 'detalle-producto') {
+        history.replaceState(null, '', '#' + destino);
+      }
+
+      actualizarMensajeMuneco(destino);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('[data-ir]').forEach(function (elemento) {
+      elemento.addEventListener('click', function (e) {
+        e.preventDefault();
+        mostrarPantalla(elemento.getAttribute('data-ir'));
+      });
+    });
+
+    window.addEventListener('hashchange', function () {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        mostrarPantalla(hash, false);
+      }
+    });
+
+    botonMenu.addEventListener('click', function () {
+      const abierto = menuPrincipal.classList.toggle('abierto');
+      botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('[data-abrir-categoria]').forEach(function (card) {
+      card.addEventListener('click', function () {
+        const cat = card.getAttribute('data-abrir-categoria');
+        mostrarPantalla('productos');
+        activarFiltro(cat);
+      });
+    });
+
+    // ----------------------------------------------------------
+    // 2. RENDERIZADO Y FILTRADO DEL CATÁLOGO
+    // ----------------------------------------------------------
+    const contenedorProductos = document.getElementById('contenedor-productos');
+    const botonesFiltro = document.querySelectorAll('.boton-filtro');
+
+    function renderizarProductos() {
+      contenedorProductos.innerHTML = '';
+
+      PRODUCTOS.forEach(function (prod) {
+        const tarjeta = document.createElement('article');
+        tarjeta.className = 'tarjeta-producto';
+        tarjeta.setAttribute('data-categoria', prod.categoria);
+
+        tarjeta.innerHTML = `
+          <div class="foto-producto">
+            <img src="${prod.imagen}" alt="${prod.nombre}" loading="lazy" onerror="this.onerror=null;this.src='${prod.fallback}';">
+            <span class="badge-origen">${prod.origen}</span>
+            <span class="badge-precio">${prod.precioTexto}</span>
+          </div>
+          <div class="info-producto">
+            <span class="tipo-producto">${prod.etiqueta}</span>
+            <h3>${prod.nombre}</h3>
+            <p>${prod.descripcion}</p>
+            <button type="button" class="boton-personalizar">Personalizar tamaño y colores →</button>
+          </div>
+        `;
+
+        tarjeta.addEventListener('click', function () {
+          abrirDetalleProducto(prod);
+        });
+
+        contenedorProductos.appendChild(tarjeta);
+      });
+    }
+
+    function activarFiltro(categoria) {
+      botonesFiltro.forEach(function (b) {
+        b.classList.toggle('activo', b.getAttribute('data-filtro') === categoria);
+      });
+
+      document.querySelectorAll('.tarjeta-producto').forEach(function (tarjeta) {
+        const cat = tarjeta.getAttribute('data-categoria');
+        if (categoria === 'todos' || cat === categoria) {
+          tarjeta.classList.remove('oculto');
+        } else {
+          tarjeta.classList.add('oculto');
+        }
+      });
+    }
+
+    botonesFiltro.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        activarFiltro(btn.getAttribute('data-filtro'));
+      });
+    });
+
+    // ----------------------------------------------------------
+    // 3. PANTALLA DETALLE Y PERSONALIZACIÓN DEL PRODUCTO
+    // ----------------------------------------------------------
+    let estadoPersonalizacion = {
+      producto: null,
+      tamano: null,
+      color: COLORES_DISPONIBLES[0],
+      relleno: RELLENOS_DISPONIBLES[0],
+      precioFinal: 0
+    };
+
+    const elDetalleImg = document.getElementById('detalle-imagen');
+    const elDetalleOrigen = document.getElementById('detalle-origen');
+    const elDetalleCat = document.getElementById('detalle-categoria');
+    const elDetalleNombre = document.getElementById('detalle-nombre');
+    const elDetalleDesc = document.getElementById('detalle-descripcion');
+    const elDetallePrecio = document.getElementById('detalle-precio-vivo');
+    const elOpcionesTamano = document.getElementById('opciones-tamano');
+    const elOpcionesColor = document.getElementById('opciones-color');
+    const elOpcionesRelleno = document.getElementById('opciones-relleno');
+    const elDedicatoria = document.getElementById('detalle-dedicatoria');
+    const elPreviewCirculo = document.getElementById('preview-circulo');
+    const elPreviewTexto = document.getElementById('preview-texto');
+
+    function formatearRD(monto) {
+      return 'RD$ ' + Math.round(monto).toLocaleString('en-US');
+    }
+
+    function actualizarVistaPreviaDetalle() {
+      const prod = estadoPersonalizacion.producto;
+      const tam = estadoPersonalizacion.tamano;
+      const col = estadoPersonalizacion.color;
+      const rel = estadoPersonalizacion.relleno;
+
+      estadoPersonalizacion.precioFinal = Math.round(prod.precioBase * tam.multiplicador);
+      elDetallePrecio.textContent = formatearRD(estadoPersonalizacion.precioFinal);
+
+      elPreviewCirculo.style.backgroundColor = col.hex;
+      elPreviewTexto.textContent = `${tam.etiqueta} · ${col.nombre} · ${rel}`;
+    }
+
+    function abrirDetalleProducto(prod) {
+      estadoPersonalizacion.producto = prod;
+      const listaTamanos = TAMANOS_POR_TIPO[prod.tipoTamano] || TAMANOS_POR_TIPO.postre;
+      estadoPersonalizacion.tamano = listaTamanos[1] || listaTamanos[0];
+      estadoPersonalizacion.color = COLORES_DISPONIBLES[0];
+      estadoPersonalizacion.relleno = RELLENOS_DISPONIBLES[0];
+      elDedicatoria.value = '';
+
+      elDetalleImg.src = prod.imagen;
+      elDetalleImg.alt = prod.nombre;
+      elDetalleImg.onerror = function () {
+        this.onerror = null;
+        this.src = prod.fallback;
+      };
+      elDetalleOrigen.textContent = prod.origen;
+      elDetalleCat.textContent = prod.etiqueta;
+      elDetalleNombre.textContent = prod.nombre;
+      elDetalleDesc.textContent = prod.descripcion;
+
+      elOpcionesTamano.innerHTML = '';
+      listaTamanos.forEach(function (tam) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip-opcion' + (tam === estadoPersonalizacion.tamano ? ' seleccionado' : '');
+        btn.textContent = tam.etiqueta;
+        btn.addEventListener('click', function () {
+          estadoPersonalizacion.tamano = tam;
+          elOpcionesTamano.querySelectorAll('.chip-opcion').forEach((c) => c.classList.remove('seleccionado'));
+          btn.classList.add('seleccionado');
+          actualizarVistaPreviaDetalle();
+        });
+        elOpcionesTamano.appendChild(btn);
+      });
+
+      elOpcionesColor.innerHTML = '';
+      COLORES_DISPONIBLES.forEach(function (col, idx) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip-opcion' + (idx === 0 ? ' seleccionado' : '');
+        btn.innerHTML = `<span class="punto-color" style="background:${col.hex}"></span>${col.nombre}`;
+        btn.addEventListener('click', function () {
+          estadoPersonalizacion.color = col;
+          elOpcionesColor.querySelectorAll('.chip-opcion').forEach((c) => c.classList.remove('seleccionado'));
+          btn.classList.add('seleccionado');
+          actualizarVistaPreviaDetalle();
+        });
+        elOpcionesColor.appendChild(btn);
+      });
+
+      elOpcionesRelleno.innerHTML = '';
+      RELLENOS_DISPONIBLES.forEach(function (rel, idx) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip-opcion' + (idx === 0 ? ' seleccionado' : '');
+        btn.textContent = rel;
+        btn.addEventListener('click', function () {
+          estadoPersonalizacion.relleno = rel;
+          elOpcionesRelleno.querySelectorAll('.chip-opcion').forEach((c) => c.classList.remove('seleccionado'));
+          btn.classList.add('seleccionado');
+          actualizarVistaPreviaDetalle();
+        });
+        elOpcionesRelleno.appendChild(btn);
+      });
+
+      actualizarVistaPreviaDetalle();
+      mostrarPantalla('detalle-producto');
+    }
+
+    document.getElementById('boton-volver-catalogo').addEventListener('click', function () {
+      mostrarPantalla('productos');
+    });
+
+    const campoProducto = document.getElementById('producto');
+    const campoComentarios = document.getElementById('comentarios');
+    const resumenSeleccion = document.getElementById('resumen-seleccion');
+    const textoSeleccion = document.getElementById('texto-seleccion');
+    const campoNombre = document.getElementById('nombre');
+
+    document.getElementById('boton-ir-a-pedir').addEventListener('click', function () {
+      const prod = estadoPersonalizacion.producto;
+      const tam = estadoPersonalizacion.tamano;
+      const col = estadoPersonalizacion.color;
+      const rel = estadoPersonalizacion.relleno;
+      const ded = elDedicatoria.value.trim();
+      const total = formatearRD(estadoPersonalizacion.precioFinal);
+
+      campoProducto.value = prod.selectValue;
+      campoProducto.classList.remove('campo-invalido');
+
+      const detalleTexto =
+        `Tamaño: ${tam.etiqueta} | Colores: ${col.nombre} | Detalle: ${rel}` +
+        (ded ? ` | Dedicatoria: "${ded}"` : '') +
+        ` | Total estimado: ${total}`;
+
+      campoComentarios.value = detalleTexto;
+      textoSeleccion.innerHTML = `<strong>${prod.nombre}</strong><br>${detalleTexto}`;
+      resumenSeleccion.classList.add('visible');
+
+      mostrarPantalla('pedidos');
+      setTimeout(function () {
+        campoNombre.focus();
+      }, 300);
+    });
+
+    campoProducto.addEventListener('change', function () {
+      if (campoProducto.value !== '') {
+        textoSeleccion.textContent = campoProducto.value;
+        resumenSeleccion.classList.add('visible');
+      } else {
+        resumenSeleccion.classList.remove('visible');
+      }
+    });
+
+    // ----------------------------------------------------------
+    // 4. VALIDACIÓN DEL FORMULARIO (SIN alert())
+    // ----------------------------------------------------------
+    const formulario = document.getElementById('formulario-pedido');
+    const mensajeCaja = document.getElementById('mensaje-formulario');
+    const campoTelefono = document.getElementById('telefono');
+    const campoCorreo = document.getElementById('correo');
+    const campoFecha = document.getElementById('fecha');
+
+    function limpiarErrores() {
+      [campoNombre, campoTelefono, campoCorreo, campoProducto, campoFecha].forEach(function (campo) {
+        campo.classList.remove('campo-invalido');
+      });
+      mensajeCaja.className = 'mensaje-formulario';
+      mensajeCaja.innerHTML = '';
+    }
+
+    function esCorreoValido(correo) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+    }
+
+    formulario.addEventListener('submit', function (evento) {
+      evento.preventDefault();
+      limpiarErrores();
+
+      const nombre = campoNombre.value.trim();
+      const telefono = campoTelefono.value.trim();
+      const correo = campoCorreo.value.trim();
+      const producto = campoProducto.value;
+      const fecha = campoFecha.value;
+      const comentarios = campoComentarios.value.trim();
+
+      const errores = [];
+
+      if (nombre === '') {
+        errores.push('Ingresa tu nombre completo.');
+        campoNombre.classList.add('campo-invalido');
+      }
+
+      if (telefono === '') {
+        errores.push('Ingresa tu número de teléfono.');
+        campoTelefono.classList.add('campo-invalido');
+      } else if (telefono.replace(/\D/g, '').length < 7) {
+        errores.push('Ingresa un número de teléfono válido (al menos 7 dígitos).');
+        campoTelefono.classList.add('campo-invalido');
+      }
+
+      if (correo === '') {
+        errores.push('Ingresa tu correo electrónico.');
+        campoCorreo.classList.add('campo-invalido');
+      } else if (!esCorreoValido(correo)) {
+        errores.push('El correo electrónico no tiene un formato válido (ejemplo@correo.com).');
+        campoCorreo.classList.add('campo-invalido');
+      }
+
+      if (producto === '') {
+        errores.push('Selecciona un producto de la lista.');
+        campoProducto.classList.add('campo-invalido');
+      }
+
+      if (fecha === '') {
+        errores.push('Selecciona la fecha de entrega.');
+        campoFecha.classList.add('campo-invalido');
+      }
+
+      if (errores.length > 0) {
+        mensajeCaja.classList.add('error');
+        mensajeCaja.innerHTML =
+          '<strong>Por favor corrige los siguientes datos:</strong><br>• ' +
+          errores.join('<br>• ');
+        return;
+      }
+
+      const numeroPedido = 'DH-' + Math.floor(1000 + Math.random() * 9000);
+      const textoWhatsApp = encodeURIComponent(
+        'Hola Dulce Hogar Repostería, acabo de registrar el pedido ' + numeroPedido + ':\n' +
+        '• Nombre: ' + nombre + '\n' +
+        '• Producto: ' + producto + '\n' +
+        '• Fecha de entrega: ' + fecha + '\n' +
+        (comentarios ? '• Personalización / Comentarios: ' + comentarios : '')
+      );
+
+      mensajeCaja.classList.add('exito');
+      mensajeCaja.innerHTML =
+        '<strong>¡Pedido #' + numeroPedido + ' confirmado, ' + nombre + '!</strong><br>' +
+        'Producto: ' + producto + '<br>' +
+        'Fecha de entrega: ' + fecha + '<br>' +
+        (comentarios ? 'Personalización: ' + comentarios + '<br>' : '') +
+        'Te contactaremos al ' + telefono + ' o a ' + correo + ' para coordinar la entrega.<br>' +
+        '<a href="https://wa.me/18090000000?text=' + textoWhatsApp + '" target="_blank" rel="noopener noreferrer" class="boton-confirmar-wa">Enviar resumen por WhatsApp</a>';
+
+      formulario.reset();
+      resumenSeleccion.classList.remove('visible');
+    });
+
+    // Inicializar catálogo y pantalla inicial
+    renderizarProductos();
+    const hashInicial = window.location.hash.replace('#', '');
+    if (hashInicial && document.getElementById(hashInicial)) {
+      mostrarPantalla(hashInicial, false);
+    } else {
+      actualizarMensajeMuneco('inicio');
+    }
+  </script>
+</body>
+</html>
